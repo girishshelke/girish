@@ -1,0 +1,216 @@
+#include<iostream>
+using namespace std;
+
+
+class Employee
+{
+private:
+	int id;
+	float sal;
+public:
+	Employee();
+	Employee(int id,float sal);
+	int get_id();
+	void set_id(int);
+	float get_sal();
+	void set_sal(float);
+	void accept();
+	void display();
+};
+
+
+
+Employee::Employee()
+{
+	this->id=0;
+	this->sal=0;
+
+}
+//Employee::Employee(string name,string address,date birth_date ,int id,float sal,string dept,int day,int month,int year):person(name ,address,birth_date),joining_date(day,month,year)
+//{
+//	this->id=id;
+//	this->sal=sal;
+//	this->dept=dept;
+//}
+
+Employee::Employee(int id,float sal)
+{
+		this->id=id;
+		this->sal=sal;
+
+}
+int Employee::get_id()
+{
+	return this->id;
+
+}
+
+void Employee::set_id(int id)
+{
+	this->id=id;
+}
+float Employee::get_sal()
+{
+	return this->sal;
+}
+void Employee::set_sal(float sal)
+{
+	this->sal=sal;
+}
+
+void Employee::accept()
+{
+
+	cout<<"\nenter the id";
+	cin>>this->id;
+	cout<<"\n enter the sal";
+	cin>>this->sal;
+}
+void Employee::display()
+{
+	//cout<<"\ndetails is "<<endl;
+	cout<<"\nid:"<<this->id<<endl;
+	cout<<"\nsal:"<<this->sal<<endl;
+
+}
+
+
+
+class manager:public Employee
+{
+private:
+	float bonus;
+public:
+	manager();
+	manager(int id,float sal,float bonus);
+	float get_bonus();
+	void set_bonus(float);
+	void display();
+	void accept();
+};
+
+manager::manager()
+{
+	this->bonus=0;
+}
+manager::manager(int id,float sal,float bonus):Employee(id,sal)
+{
+	this->bonus=bonus;
+}
+
+float manager:: get_bonus()
+{
+	return this->bonus;
+}
+void manager::set_bonus(float bonus)
+{
+	this->bonus=bonus;
+
+}
+
+void manager::display()
+{
+  cout<<"\ndetails are:	"<<endl;
+  Employee::display();
+  cout<<"\nbonus is:	"<<this->bonus;
+
+}
+void manager:: accept()
+{
+	cout<<"\nenter the details"<<endl;
+	 Employee::accept();
+	 cout<<"\nenter the bonus"<<endl;
+	 cin>>this->bonus;
+
+}
+
+
+
+class salesman:public Employee
+{
+private:
+	float comm;
+public:
+	salesman();
+	salesman(int id,float sal,float comm);
+	salesman(float comm);
+	float get_comm();
+	void set_comm(float);
+	void display();
+	void accept();
+};
+
+salesman::salesman()
+{
+	this->comm=0.0f;
+}
+salesman::salesman(int id,float sal,float comm):Employee(id,sal)
+{
+	this->comm=comm;
+}
+salesman::salesman(float comm)
+{
+	this->comm=comm;
+}
+
+float salesman:: get_comm()
+{
+   return this->comm;
+}
+void salesman::set_comm(float comm)
+{
+	this->comm=comm;
+}
+void salesman:: display()
+{
+	cout<<"\ndetails are"<<endl;
+	Employee::display();
+	cout<<"\ncomm is "<<this->comm;
+}
+void salesman:: accept()
+{
+  cout<<"\nenter the details";
+  Employee::accept();
+  cout<<"\nenter the comm"<<endl;
+  cin>>this->comm;
+}
+
+class sales_manager:public manager,public salesman
+{
+public:
+	sales_manager();
+	sales_manager(int id,float sal,float bonus,int id1,float sal1,float comm);
+	void display();
+	void accept();
+};
+
+sales_manager::sales_manager()
+{
+
+}
+sales_manager::sales_manager(int id,float sal,float bonus,int id1,float sal1,float comm):manager(id,sal,bonus),salesman(id1 ,sal1,comm)
+{
+
+}
+void sales_manager:: display()
+{
+
+	manager::display();
+	salesman::display();
+}
+void sales_manager::accept()
+{
+	cout<<"\nenter the details";
+	manager::accept();
+	salesman::accept();
+}
+
+int main()
+{
+//	sales_manager sm;
+//	sm.display();
+
+	sales_manager sm1(1,200000,5000,2,50000,10);
+
+	sm1.display();
+}
